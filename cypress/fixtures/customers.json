@@ -1,0 +1,15 @@
+{
+  "customer1": {
+    "firstName": "John",
+    "lastName": "Doe",
+    "email": "john@example.com",
+    "phone": "01711111111"
+  },
+
+  "customer2": {
+    "firstName": "Sarah",
+    "lastName": "Smith",
+    "email": "sarah@example.com",
+    "phone": "01822222222"
+  }
+}

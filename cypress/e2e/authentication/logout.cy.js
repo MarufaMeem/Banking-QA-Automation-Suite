@@ -1,6 +1,6 @@
-describe('Authentication Module', () => {
+describe('Logout Test', () => {
 
-    it('Valid Login', () => {
+    it('Logout Successfully', () => {
 
         cy.fixture('users').then((users) => {
 
@@ -9,8 +9,10 @@ describe('Authentication Module', () => {
                 users.admin.password
             );
 
+            cy.logout();
+
             cy.url()
-              .should('include', '/dashboard');
+              .should('include', '/auth/login');
 
         });
 

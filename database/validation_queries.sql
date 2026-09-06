@@ -1,126 +1,177 @@
--- =====================================
--- CUSTOMER VALIDATIONS
--- =====================================
+-- CUSTOMER VALIDATION QUERIES
 
--- Verify customer exists
+
+-- SQL-001 Verify Customer Exists
 SELECT *
 FROM customers
-WHERE email='john@example.com';
+WHERE customer_id = 1;
 
--- Verify active customers
-SELECT *
+-- SQL-002 Verify Customer Created Successfully
+SELECT COUNT(*)
 FROM customers
-WHERE status='ACTIVE';
+WHERE email = 'john@example.com';
 
--- Verify duplicate email
+-- SQL-003 Verify Duplicate Email Does Not Exist
 SELECT email, COUNT(*)
 FROM customers
 GROUP BY email
 HAVING COUNT(*) > 1;
 
--- Total customers
-SELECT COUNT(*)
-FROM customers;
-
--- Customer by phone number
-SELECT *
+-- SQL-004 Verify Customer First Name
+SELECT first_name
 FROM customers
-WHERE phone='01711111111';
+WHERE customer_id = 1;
+
+-- SQL-005 Verify Customer Last Name
+SELECT last_name
+FROM customers
+WHERE customer_id = 1;
+
+-- SQL-006 Verify Customer Status
+SELECT status
+FROM customers
+WHERE customer_id = 1;
 
 
--- =====================================
--- ACCOUNT VALIDATIONS
--- =====================================
+-- ACCOUNT VALIDATION QUERIES
 
--- Verify account exists
+
+-- SQL-007 Verify Account Exists
 SELECT *
 FROM accounts
-WHERE account_number='ACC1001';
+WHERE account_number = 'ACC1001';
 
--- Verify active accounts
-SELECT *
+-- SQL-008 Verify Account Type
+SELECT account_type
 FROM accounts
-WHERE status='ACTIVE';
+WHERE account_number = 'ACC1001';
 
--- Verify account balance
+-- SQL-009 Verify Opening Balance
 SELECT balance
 FROM accounts
-WHERE account_number='ACC1001';
+WHERE account_number = 'ACC1001';
 
--- Total accounts
-SELECT COUNT(*)
-FROM accounts;
+-- SQL-010 Verify Account Status
+SELECT status
+FROM accounts
+WHERE account_number = 'ACC1001';
 
--- Find accounts with balance > 50000
+-- SQL-011 Verify Frozen Account
 SELECT *
 FROM accounts
-WHERE balance > 50000;
+WHERE status = 'FROZEN';
+
+-- SQL-012 Verify Closed Account
+SELECT *
+FROM accounts
+WHERE status = 'CLOSED';
 
 
--- =====================================
--- TRANSACTION VALIDATIONS
--- =====================================
+-- TRANSACTION VALIDATION QUERIES
 
--- Verify deposit transactions
+
+-- SQL-013 Verify Transaction Exists
 SELECT *
 FROM transactions
-WHERE transaction_type='DEPOSIT';
+WHERE transaction_id = 1;
 
--- Verify withdrawal transactions
+-- SQL-014 Verify Deposit Transaction
 SELECT *
 FROM transactions
-WHERE transaction_type='WITHDRAW';
+WHERE transaction_type = 'DEPOSIT';
 
--- Total transactions
+-- SQL-015 Verify Withdrawal Transaction
+SELECT *
+FROM transactions
+WHERE transaction_type = 'WITHDRAW';
+
+-- SQL-016 Verify Transaction Amount
+SELECT amount
+FROM transactions
+WHERE transaction_id = 1;
+
+-- SQL-017 Verify Latest Transaction
+SELECT *
+FROM transactions
+ORDER BY transaction_date DESC
+LIMIT 1;
+
+-- SQL-018 Verify Transaction Count
 SELECT COUNT(*)
 FROM transactions;
 
--- Highest transaction amount
-SELECT MAX(amount)
-FROM transactions;
 
--- Lowest transaction amount
-SELECT MIN(amount)
-FROM transactions;
+-- TRANSFER VALIDATION QUERIES
 
 
--- =====================================
--- TRANSFER VALIDATIONS
--- =====================================
-
--- Verify transfer record
+-- SQL-019 Verify Transfer Record Exists
 SELECT *
 FROM transfers
-WHERE transfer_amount=5000;
+WHERE transfer_id = 1;
 
--- Total transfers
-SELECT COUNT(*)
-FROM transfers;
-
--- Largest transfer
-SELECT MAX(transfer_amount)
-FROM transfers;
-
--- Smallest transfer
-SELECT MIN(transfer_amount)
-FROM transfers;
-
--- Transfers from account 1
+-- SQL-020 Verify Internal Transfer
 SELECT *
 FROM transfers
-WHERE from_account=1;
+WHERE transfer_type = 'INTERNAL';
+
+-- SQL-021 Verify External Transfer
+SELECT *
+FROM transfers
+WHERE transfer_type = 'EXTERNAL';
+
+-- SQL-022 Verify Transfer Amount
+SELECT amount
+FROM transfers
+WHERE transfer_id = 1;
+
+-- SQL-023 Verify Transfer Date
+SELECT transfer_date
+FROM transfers
+WHERE transfer_id = 1;
 
 
--- =====================================
--- JOIN VALIDATIONS
--- =====================================
+-- BALANCE VALIDATION QUERIES
 
-SELECT
-c.customer_id,
-c.first_name,
-c.last_name,
-a.account_number,
-a.balance
-FROM customers c
-JOIN accounts a
-ON c.customer_id=a.customer_id;
+
+-- SQL-024 Verify Account Balance
+SELECT balance
+FROM accounts
+WHERE account_number = 'ACC1001';
+
+-- SQL-025 Verify Source Account Balance After Transfer
+SELECT balance
+FROM accounts
+WHERE account_number = 'ACC1001';
+
+-- SQL-026 Verify Destination Account Balance After Transfer
+SELECT balance
+FROM accounts
+WHERE account_number = 'ACC1002';
+
+-- SQL-027 Verify Negative Balance Accounts
+SELECT *
+FROM accounts
+WHERE balance < 0;
+
+-- SQL-028 Verify High Value Accounts
+SELECT *
+FROM accounts
+WHERE balance > 100000;
+
+
+-- DATA INTEGRITY QUERIES
+
+
+-- SQL-029 Verify Every Account Has Customer
+SELECT a.account_number
+FROM accounts a
+LEFT JOIN customers c
+ON a.customer_id = c.customer_id
+WHERE c.customer_id IS NULL;
+
+-- SQL-030 Verify Every Transaction Has Valid Account
+SELECT t.transaction_id
+FROM transactions t
+LEFT JOIN accounts a
+ON t.account_number = a.account_number
+WHERE a.account_number IS NULL;

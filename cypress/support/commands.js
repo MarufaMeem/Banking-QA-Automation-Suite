@@ -1,15 +1,24 @@
-Cypress.Commands.add(
-  'login',
-  (username, password) => {
+Cypress.Commands.add('login', (username, password) => {
 
-    cy.get('#username')
-      .type(username)
+    cy.visit('/web/index.php/auth/login');
 
-    cy.get('#password')
-      .type(password)
+    cy.get('input[name="username"]')
+      .type(username);
 
-    cy.get('#loginBtn')
-      .click()
+    cy.get('input[name="password"]')
+      .type(password);
 
-  }
-)
+    cy.get('button[type="submit"]')
+      .click();
+
+});
+
+Cypress.Commands.add('logout', () => {
+
+    cy.get('.oxd-userdropdown-tab')
+      .click();
+
+    cy.contains('Logout')
+      .click();
+
+});

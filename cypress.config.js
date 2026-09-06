@@ -11,7 +11,7 @@ module.exports = defineConfig({
 
   e2e: {
 
-    baseUrl: "https://example.cypress.io",
+    baseUrl: "https://opensource-demo.orangehrmlive.com",
 
     setupNodeEvents(on, config) {
 

@@ -1,17 +1,17 @@
 class LoginPage {
 
-    usernameField = "#username";
+    usernameInput = 'input[name="username"]';
 
-    passwordField = "#password";
+    passwordInput = 'input[name="password"]';
 
-    loginButton = "#loginBtn";
+    loginButton = 'button[type="submit"]';
 
     enterUsername(username) {
-        cy.get(this.usernameField).type(username);
+        cy.get(this.usernameInput).type(username);
     }
 
     enterPassword(password) {
-        cy.get(this.passwordField).type(password);
+        cy.get(this.passwordInput).type(password);
     }
 
     clickLogin() {
@@ -27,6 +27,7 @@ class LoginPage {
         this.clickLogin();
 
     }
+
 }
 
 export default LoginPage;

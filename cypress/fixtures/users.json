@@ -1,16 +1,11 @@
 {
   "admin": {
-    "username": "admin",
+    "username": "Admin",
     "password": "admin123"
   },
 
-  "manager": {
-    "username": "manager",
-    "password": "manager123"
-  },
-
   "invalidUser": {
-    "username": "wrong",
-    "password": "wrong123"
+    "username": "WrongUser",
+    "password": "WrongPassword"
   }
 }

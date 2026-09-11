@@ -4,6 +4,10 @@
 
 The **Banking QA Automation Suite** is an industry-style QA portfolio project designed to demonstrate manual testing, automation testing, API testing, database testing, defect management, and QA documentation for a Banking Customer Management System.
 
+Watch the video demonstration here:
+
+[![Watch the Demo](https://img.youtube.com/vi/0zBYBvIYrkM/maxresdefault.jpg)]([https://www.youtube.com/watch?v=0zBYBvIYrkM](https://youtu.be/KZm19rkT6zI))
+
 This project follows real-world QA practices used in Banking and FinTech applications and showcases skills required for:
 
 * QA Engineer

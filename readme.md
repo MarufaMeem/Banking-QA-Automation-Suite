@@ -6,8 +6,7 @@ The **Banking QA Automation Suite** is an industry-style QA portfolio project de
 
 Watch the video demonstration here:
 
-
-[![Watch the Demo](https://img.youtube.com/vi/KZm19rkT6zI/maxresdefault.jpg)](https://www.youtube.com/watch?v=KZm19rkT6zI)
+[Watch Demo Video](https://www.youtube.com/watch?v=KZm19rkT6zI)
 
 This project follows real-world QA practices used in Banking and FinTech applications and showcases skills required for:
 
